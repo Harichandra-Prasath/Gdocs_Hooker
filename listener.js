@@ -32,8 +32,9 @@ function handleDownloaded(downloadedFile) {
 
 const naviagateDocs = () => {
 
+	// Opens with default google account
 	browser.tabs.create({
-		url: "https://docs.google.com/",
+		url: "https://docs.google.com/document/u/0/create?usp=docs_home&ths=true",
 
 	}).then((tab) => {
 		console.log(`Created a new tab with id ${tab.id}`);
