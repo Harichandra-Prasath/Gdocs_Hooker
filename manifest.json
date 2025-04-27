@@ -1,0 +1,14 @@
+{
+	"manifest_version": 2,
+	"name": "Gdocks-Hooker",
+	"version": "1.0",
+	"description": "Listens for docx file downloads and try to open gdocs to view the downloaded file. Useful for Linux based systems that doesnt have local docx viewer.",
+	"background": {
+		"scripts": [
+			"listener.js"
+		]
+	},
+	"permissions": [
+		"downloads"
+	]
+}
