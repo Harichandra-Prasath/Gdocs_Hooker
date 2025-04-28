@@ -18,24 +18,45 @@ function handleDownloaded(downloadedFile) {
 
 		if (fileName.endsWith(".docx")) {
 			console.log(`Got a .docx file with name ${fileName}`);
-			naviagateDocs()
+			startAction(fileName).then((id) => {
+				if (id) {
+					naviagateDocs(id)
+				}
+			})
 		} else {
-
 			console.log(`Recieved a non .docx file, Ignoring...`);
-
 		}
 	}
 }
 
+const startAction = async (fileName) => {
 
+	// Create a post method
+	const response = await fetch("http://127.0.0.1:8000/upload_to_drive", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ "FilePath": fileName })
+	});
 
+	const response_data = await response.json();
 
-const naviagateDocs = () => {
+	console.log(response_data)
+
+	if (response.ok) {
+		return response_data.id
+	} else {
+		return null
+	}
+
+}
+
+const naviagateDocs = (docId) => {
 
 	// Opens with default google account
 	browser.tabs.create({
-		url: "https://docs.google.com/document/u/0/create?usp=docs_home&ths=true",
-
+		url: `https://docs.google.com/document/d/${docId}`,
 	}).then((tab) => {
 		console.log(`Created a new tab with id ${tab.id}`);
 	}, (err) => {
