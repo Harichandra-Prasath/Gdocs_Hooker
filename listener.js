@@ -31,6 +31,15 @@ function handleDownloaded(downloadedFile) {
 
 const startAction = async (fileName) => {
 
+	// get the Port
+	const enginePort = localStorage.getItem('Port');
+
+	if (!enginePort || enginePort == "") {
+		console.log("Engine Port is not set yet.")
+		return
+	}
+
+
 	// Create a post method
 	const response = await fetch("http://127.0.0.1:8000/upload_to_drive", {
 		method: "POST",
@@ -47,7 +56,7 @@ const startAction = async (fileName) => {
 	if (response.ok) {
 		return response_data.id
 	} else {
-		return null
+		return
 	}
 
 }

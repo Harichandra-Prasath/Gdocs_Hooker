@@ -28,25 +28,34 @@ checkButton.addEventListener("click", () => {
 
 	givenPort = portInput.value;
 
-	const ok = pingEngine(givenPort);
+	pingEngine(givenPort).then((ok) => {
 
-	// For now, Just Hardcode it
-	if (ok) {
-		cross.classList.add("hidden")
-		tick.classList.remove("hidden")
+		if (ok) {
+			cross.classList.add("hidden")
+			tick.classList.remove("hidden")
 
-		isChecked = true;
-		checkedPort = givenPort;
+			isChecked = true;
+			checkedPort = givenPort;
 
-	}
-	else {
-		tick.classList.add("hidden")
-		cross.classList.remove("hidden")
-	}
+		}
+		else {
+			tick.classList.add("hidden")
+			cross.classList.remove("hidden")
+		}
+	});
+
+
 });
 
-const pingEngine = (port) => {
+const pingEngine = async (port) => {
 
-	return port == "3000";
-
+	// Make the check request
+	try {
+		const response = await fetch(`http://127.0.0.1:${port}/check`);
+		if (response.ok) {
+			return true;
+		}
+	} catch (err) {
+		return false;
+	}
 }
