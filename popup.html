@@ -12,10 +12,16 @@
 
 	<div class="popup">
 		<label for="portInput">Enter the Port the Backend Engine is Running</label>
-		<input type="number" id="portInput" name="portInput">
+		<div class="input-wrapper">
+			<input type="number" id="portInput" name="portInput" />
+			<span id="tick" class="icon hidden">✔</span>
+			<span id="cross" class="icon hidden">✖</span>
+		</div>
 		<input type="button" id="checkButton" name="checkButton" value="Check">
-		<input type="button" id="checkSaveButton" name="checkSaveButton" value="Save">
+		<input type="button" id="saveButton" name="saveButton" value="Save">
+		<p id="saveMessage" class="hidden"></p>
 	</div>
 </body>
+<script src="popup.js"></script>
 
 </html>
